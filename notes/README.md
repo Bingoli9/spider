@@ -3,8 +3,9 @@
 #### 架构
 
 <center>
-    <img src=""/>
+    <img src="https://github.com/leekeiling/spider/blob/master/notes/pictures/1.png?raw=true"/>
 </center>
+
 
 #### 工作流程
 
