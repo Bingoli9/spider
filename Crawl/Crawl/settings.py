@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for DajieCrawl project
+# Scrapy settings for Crawl project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,14 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'DajieCrawl'
+BOT_NAME = 'Crawl'
 
-SPIDER_MODULES = ['DajieCrawl.spiders']
-NEWSPIDER_MODULE = 'DajieCrawl.spiders'
+SPIDER_MODULES = ['Crawl.spiders']
+NEWSPIDER_MODULE = 'Crawl.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'DajieCrawl (+http://www.yourdomain.com)'
+#USER_AGENT = 'Crawl (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,8 +47,8 @@ DEFAULT_REQUEST_HEADERS = {
   'Cache-Control':'no-cache',
   'Pragma':'no-cache',
   'Upgrade-Insecure-Requests':'1',
-  'Host':'www.dajie.com',
-  'referer':'www.dajie.com'
+  'Host':'www.douban.com',
+  'referer':'www.douban.com'
 }
 
 USER_AGENTS = [
@@ -90,8 +90,8 @@ USER_AGENTS = [
 
 HTTP_PROXY ='http://127.0.0.1:8118'
 #使用scrapy_redis的调度器
-SCHEDULER = "DajieCrawl.scrapy_redis.scheduler.Scheduler"
-SCHEDULER_QUEUE_CLASS = 'DajieCrawl.scrapy_redis.queue.SpiderPriorityQueue'
+SCHEDULER = "Crawl.scrapy_redis.scheduler.Scheduler"
+SCHEDULER_QUEUE_CLASS = 'Crawl.scrapy_redis.queue.SpiderPriorityQueue'
 SCHEDULER_PERSIST = True
 # 在redis中保持scrapy-redis用到的各个队列，从而允许暂停和暂停后恢复
 
@@ -110,19 +110,19 @@ FILTER_DB = 0
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'DajieCrawl.middlewares.DajiecrawlSpiderMiddleware': 543,
+#    'Crawl.middlewares.CrawlSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-    'DajieCrawl.middlewares.RandomUserAgent.RandomUserAgent': 410,
+    'Crawl.middlewares.RandomUserAgent.RandomUserAgent': 410,
     # 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware':None,
     # 'yunqiCrawl.middlewares.RandomProxy.RandomProxy': 700,
 }
-MONGO_URI = 'mongodb://127.0.0.1:27017,127.0.0.1:27018,127.0.0.1:27019'
-MONGO_DATABASE='dajie'
+MONGO_URI = 'mongodb://127.0.0.1:27017'
+MONGO_DATABASE='douban'
 REPLICASET = 'repset'
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -134,7 +134,7 @@ REPLICASET = 'repset'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'DajieCrawl.pipelines.DajieCrawlPipeline': 300,
+   'Crawl.pipelines.CrawlPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

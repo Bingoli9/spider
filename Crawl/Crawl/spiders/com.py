@@ -3,13 +3,13 @@ import scrapy
 from scrapy.linkextractors import LinkExtractor
 from scrapy.spiders import CrawlSpider, Rule
 
-from DajieCrawl.items import DajieWorkListItem
+from Crawl.items import WorkListItem
 from scrapy.http import Request, FormRequest
 
-class DajieSpider(CrawlSpider):
-    name = 'DajieSpider'
-    allowed_domains = ['job.dajie.com']
-    start_urls = ['https://job.dajie.com/e018b595-2e5a-44e6-bf9d-dca5dc260bc5.html?jobsearch=0&pagereferer=blank&keyword=%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91&clicktype=job']
+class Spider(CrawlSpider):
+    name = 'Spider'
+    allowed_domains = ['job.douban.com']
+    start_urls = ['https://job.douban.com/e018b595-2e5a-44e6-bf9d-dca5dc260bc5.html?jobsearch=0&pagereferer=blank&keyword=%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91&clicktype=job']
 
     def parse_work_list(self,response):
         text_top = response.xpath(".//*[@id='jp-app-wrap']/div[2]/div[2]/div[1]/div[1]").extract_first()
@@ -20,7 +20,7 @@ class DajieSpider(CrawlSpider):
 
         workCompany = response.xpath(".//*[@id='jp-app-wrap']/div[2]/div[2]/div[3]/dl/a/dd/p[2]/span/text()").extract_first()
 
-        workListItem = DajieWorkListItem(workName=workName, workSalary=workSalary, 
+        workListItem = WorkListItem(workName=workName, workSalary=workSalary, 
             workDescription=workDescription, workCompany=workCompany)
         yield workListItem
 
@@ -50,5 +50,5 @@ class DajieSpider(CrawlSpider):
 
 if __name__=='__main__':
 	process = CrawlerProcess(get_project_settings())
-	process.crawl('DajieCrawler')
+	process.crawl('Crawler')
 	process.start()

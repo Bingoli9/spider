@@ -7,9 +7,9 @@
 
 import re
 import pymongo
-from DajieCrawl.items import DajieWorkListItem
+from Crawl.items import WorkListItem
 
-class DajiecrawlPipeline(object):
+class CrawlPipeline(object):
     def __init__(self, mongo_uri, mongo_db,replicaset):
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
@@ -19,7 +19,7 @@ class DajiecrawlPipeline(object):
     def from_crawler(cls, crawler):
         return cls(
             mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_db=crawler.settings.get('MONGO_DATABASE', 'dajie'),
+            mongo_db=crawler.settings.get('MONGO_DATABASE', 'crawl'),
             replicaset = crawler.settings.get('REPLICASET')
         )
 
@@ -32,18 +32,12 @@ class DajiecrawlPipeline(object):
 
 
     def process_item(self, item, spider):
-        if isinstance(item,YunqiBookListItem):
-            self._process_booklist_item(item)
-        else:
-            self._process_bookeDetail_item(item)
+        self._process__item(item)
         return item
 
 
 
-    def _process_worklist_item(self,item):
-        '''
-        处理岗位
-        :param item:
-        :return:
-        '''
+    def _process__item(self,item):
         self.db.workInfo.insert(dict(item))
+
+
